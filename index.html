@@ -413,7 +413,13 @@
         
     @media screen {
         .first-page-only {
-          display: block;
+          
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 50;
+      padding: 1rem 0;
+
         }
       }
 
@@ -432,7 +438,7 @@
         <div class="w-full h-12 mb-6 blue-bar-top-print" style="background-color: #0062ff;"></div>
 
         <!-- Header Section (only one instance) - now with a specific class for print styling -->
-        <header class= "first-page-only print:block hidden">
+        <header class= "first-page-only print:block">
             <div class="header-section header-section-print">
                 <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
                 <div>
