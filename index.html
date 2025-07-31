@@ -197,236 +197,256 @@
         }
         /* Print specific styles */
         @media print {
-            body {
-                font-family: 'Inter', sans-serif; /* Ensure font is applied for print */
-                background-color: #ffffff;
-                margin: 0;
-                padding: 0;
-                width: 21.59cm; /* 8.5 inches */
-                min-height: 27.94cm; /* 11 inches */
-                margin: 0 auto; /* Center the content on the page */
-            }
-            .container {
-                box-shadow: none;
-                margin: 0; /* Remove existing margins from screen view */
-                padding: 0 !important; /* Remove default container padding to allow absolute positioning from top */
-                width: 100%; /* Ensure it takes full width */
-                max-width: none;
-                min-height: 27.94cm; /* Full 11 inches height */
-                box-sizing: border-box; /* Include padding in element's total width/height */
-            }
-            .button-group, .add-row-btn, .delete-row-btn {
-                display: none; /* Hide buttons when printing */
-            }
-            .page-break {
-                page-break-before: always;
+                 /* Reset body margins and background for print */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+    
+    /* Container adjustments - reduced padding for more content space */
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    /* Reduce header section sizing */
+    .header-section {
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .header-section img {
+        max-height: 80px; /* Reduced from 160px */
+        width: auto;
+    }
+    
+    .header-section div {
+        font-size: 0.75rem; /* Reduced from 0.9rem */
+    }
+    
+    /* Main title sizing */
+    h1 {
+        font-size: 1.5rem !important; /* Reduced from 2.5rem (text-4xl) */
+        margin-bottom: 15px !important;
+    }
+    
+    /* Section titles - significantly reduced */
+    .section-title {
+        font-size: 1.1rem !important; /* Reduced from 1.8rem */
+        padding: 8px 12px !important; /* Reduced padding */
+        margin-bottom: 15px !important;
+    }
+    
+    /* Hide elements that shouldn't print */
+    .button-group,
+    .add-row-btn,
+    .delete-row-btn,
+    .print-footer {  /* Hide footer completely */
+        display: none !important;
+    }
+    
+    /* Ensure inputs and textareas print their values */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+        border: none !important;
+        background-color: transparent !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 0.85rem; /* Slightly smaller for print */
+    }
+    
+    /* Label font size */
+    .input-group label {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    /* Make sure input values are visible */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    /* Page break controls */
+    .page-break {
+        page-break-before: always;
+        break-before: always;
+    }
+    
+    /* Avoid breaks inside critical elements */
+    table,
+    .grand-total-section,
+    .acceptance-section {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    /* Header handling for first page */
+    .first-page-only {
+        display: block;
+    }
+    
+    /* Hide repeated headers by default */
+    .repeated-print-header {
+        display: none;
+    }
+    
+    /* Show repeated headers after page breaks */
+    .page-break + .repeated-print-header {
+        display: block;
+        page-break-inside: avoid;
+    }
+    
+    /* Ensure content after headers doesn't break */
+    .content-after-header {
+        page-break-inside: avoid;
+    }
+    
+    /* Table styling for print */
+    table {
+        width: 100%;
+        font-size: 0.75rem; /* Reduced from 0.9rem */
+    }
+    
+    table th,
+    table td {
+        padding: 6px 8px; /* Reduced padding */
+        font-size: 0.75rem;
+    }
+    
+    /* Table headers */
+    table th {
+        font-size: 0.7rem !important; /* Smaller headers */
+        text-transform: uppercase;
+    }
+    
+    /* Plans table header adjustments */
+    table tr th[colspan="4"] {
+        font-size: 1.2rem !important; /* Reduced from 1.8rem */
+        padding: 10px !important;
+    }
+    
+    table tr th[style*="font-size: large"] {
+        font-size: 0.85rem !important; /* Override inline large font */
+    }
+    
+    /* Total rows */
+    .total-row td {
+        font-size: 0.85rem !important; /* Reduced from 1.1rem */
+        font-weight: 600;
+    }
+    
+    /* Grand total section */
+    .grand-total-section {
+        padding: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .grand-total-section div {
+        font-size: 0.95rem !important; /* Reduced from 1.3rem */
+        margin-bottom: 8px;
+    }
+    
+    /* Ensure colored elements print correctly */
+    .section-title,
+    .total-row td,
+    .grand-total-section,
+    table th {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    /* Blue bar at top of pages */
+    .blue-bar-top-print,
+    .repeated-print-header > div:first-child {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        height: 30px !important; /* Reduced from 40px */
+        background-color: #0062ff !important;
+    }
+    
+    /* Ensure checkmarks and crosses print correctly */
+    td[style*="color: green"],
+    td[style*="color: red"] {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-weight: bold;
+        font-size: 0.9rem; /* Reduced from 1.1rem */
+    }
+    
+    /* Signature lines */
+    .signature-line {
+        border-bottom: 1px solid #000;
+        min-height: 25px;
+        margin-bottom: 8px;
+        font-size: 0.75rem;
+    }
+    
+    /* Ensure links print in black */
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+        font-size: 0.8rem;
+    }
+    
+    /* Make readonly inputs look normal */
+    input[readonly],
+    .bg-gray-100 {
+        background-color: transparent !important;
+    }
+    
+    /* Hide any hover effects */
+    table tr:hover {
+        background-color: transparent !important;
+    }
+    
+    /* Needs Assessment textarea styling */
+    #needsAssessmentText {
+        min-height: 200px; /* Reduced from 300px */
+        resize: none;
+        font-family: inherit;
+        line-height: 1.4;
+        font-size: 0.85rem;
+    }
+    
+    /* About section text */
+    .section p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    
+    /* Acceptance section */
+    .acceptance-section p {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+    }
+    
+    /* Hide empty table cells in print */
+    td:empty {
+        border: none !important;
+    }
+    
+    /* Page margins - adjusted for better right margin */
+    @page {
+        margin: 0.5in 0.5in 0.5in 0.75in; /* top, right, bottom, left */
+        size: letter portrait;
+    }
+    
+    /* First page special handling */
+    @page:first {
+        margin-top: 0.5in;
+    }
             }
 
-            /* --- First Page Header Specifics --- */
-            /* The very first blue bar at the top of the container */
-            .container > .blue-bar-top-print {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 48px; /* Fixed height */
-                background-color: #0062ff !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                margin-bottom: 0 !important; /* Remove any margin that might push content */
-            }
-
-            /* The very first header section (logo + address) */
-            .container > .header-section-print {
-                position: absolute;
-                top: 48px; /* Position right below the blue bar */
-                left: 0;
-                width: 100%;
-                padding: 20px 0.5cm !important; /* Apply side padding here */
-                box-sizing: border-box;
-                background-color: #ffffff;
-                border-bottom: 1px solid #e0e0e0;
-                margin-bottom: 0 !important;
-            }
-
-            /* Content area that starts after the fixed header on the first page */
-            .content-after-header-print {
-                /* Calculate space needed for blue bar (48px) + header (approx 120px) + some buffer */
-                padding-top: 200px !important; /* Adjusted padding-top for more space */
-                padding-left: 0.5cm; /* Apply left/right padding here for main content */
-                padding-right: 0.5cm;
-                padding-bottom: 2.5cm; /* Bottom padding for the page */
-                z-index: 1; /* Ensure content is above fixed header */
-            }
-
-            /* --- Repeated Header for Subsequent Pages --- */
-            .repeated-print-header {
-                display: block !important; /* Ensure it's visible */
-                position: fixed; /* Position relative to the page */
-                top: 0;
-                left: 0;
-                width: 100%;
-                box-sizing: border-box;
-                z-index: 100; /* Ensure it's above other content */
-                background-color: #ffffff; /* Ensure header background is white */
-            }
-            .repeated-print-header > div:first-child { /* Blue bar inside repeated header */
-                height: 48px;
-                background-color: #0062ff !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                margin-bottom: 0 !important;
-            }
-            .repeated-print-header > .header-section { /* Header content inside repeated header */
-                padding: 20px 0.5cm !important; /* Match first page header padding */
-                border-bottom: 1px solid #e0e0e0;
-                margin-bottom: 0 !important;
-                background-color: #ffffff;
-                display: flex; /* Ensure flexbox for logo and address alignment */
-                justify-content: space-between;
-                align-items: center;
-            }
-            /* Adjust content immediately following a repeated header */
-            .content-after-header { /* Applied to all content sections that need top padding for header */
-                padding-top: 200px !important; /* Same padding as first page content */
-                padding-left: 0.5cm; /* Apply left/right padding here */
-                padding-right: 0.5cm;
-                padding-bottom: 2.5cm; /* Bottom padding for the page */
-            }
-
-            /* --- General Print Styles (section titles, tables, inputs etc.) --- */
-            .section-title {
-                background-color: #0062ff !important;
-                color: #ffffff !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                position: static !important; /* Ensure it flows normally */
-                margin-top: 20px;
-                margin-bottom: 20px;
-                margin-left: -0.5cm !important; /* Adjust negative margin to match new padding */
-                margin-right: -0.5cm !important; /* Adjust negative margin to match new padding */
-                width: auto !important; /* Allow expansion with negative margins */
-                padding: 10px 0.5cm !important; /* Apply 0.5cm padding to the text inside the blue bar */
-                box-sizing: border-box;
-                text-align: center !important; /* Center subtitle text */
-                font-size: 2.2rem !important; /* Increased font size for subtitles */
-            }
-
-            .section { /* Added to keep entire sections together */
-                page-break-inside: avoid !important;
-            }
-
-            /* Other existing print styles for tables, inputs, etc. */
-            input[type="number"], input[type="text"], input[type="date"], textarea, select {
-                border: none !important;
-                background: none !important;
-                padding: 0 !important;
-                font-size: inherit !important;
-                color: inherit !important;
-                box-shadow: none !important;
-                width: auto !important;
-                display: inline-block;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-            }
-            [contenteditable="true"] {
-                outline: none !important;
-                border: none !important;
-            }
-            textarea {
-                width: 100% !important;
-                height: auto !important;
-                display: block !important;
-                box-sizing: border-box !important;
-                overflow: hidden !important;
-                resize: none !important;
-                font-size: 1.1rem !important; /* Increased font size for textarea text */
-            }
-            /* Increased font size for general text within content areas */
-            .content-after-header-print p,
-            .content-after-header-print ul li {
-                font-size: 1.1rem !important;
-                text-align: center !important; /* Center text content */
-            }
-
-            #priceSecurityBasics, #priceSecurityStandards, #priceCIO, #pricePenTesting, #priceHardwareFirewall,
-            #priceOnboarding, #priceFirewall, #priceFirewallImpl, #inputDiscountFirewallImpl, #inputDiscountOnboarding, #priceTax,
-            #totalMonthlyRecurring, #totalOneTimeCharge {
-                font-weight: bold;
-            }
-            .signature-line {
-                border-bottom: 1px solid #000 !important;
-                margin-left: auto !important; /* Center the line */
-                margin-right: auto !important; /* Center the line */
-            }
-            .header-section img {
-                max-height: 80px;
-            }
-            table {
-                table-layout: fixed;
-                width: 100%;
-                /* Ensure tables try to stay together */
-                page-break-inside: avoid !important;
-                page-break-after: avoid !important;
-            }
-            table th, table td {
-                padding: 5px 5px;
-                font-size: 0.7rem; /* Keep table cell font size smaller for density */
-                word-wrap: break-word;
-            }
-            /* Adjusted column widths for print to prevent cutoff and ensure Quantity is not shrunk */
-            table th:nth-child(1), table td:nth-child(1) { width: 10%; } /* Quantity - Adjusted */
-            table th:nth-child(2), table td:nth-child(2) { width: 25%; } /* Description - Adjusted */
-            table th:nth-child(3), table td:nth-child(3) { width: 30%; } /* Item Detail / License - Adjusted */
-            table th:nth-child(4), table td:nth-child(4) { width: 15%; } /* Price - Adjusted (increased) */
-            table th:nth-child(5), table td:nth-child(5) { width: 20%; } /* Total - Adjusted */
-            table input[type="number"], table input[type="text"], table select {
-                width: 100% !important;
-                box-sizing: border-box;
-            }
-            .custom-description-input {
-                width: 100% !important;
-            }
-            .total-row {
-                page-break-before: avoid !important; /* Keep total row with its table */
-            }
-
-            /* Print Footer */
-            .print-footer {
-                display: block !important;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                text-align: center;
-                font-size: 0.7rem;
-                color: #555;
-                padding: 10px 0;
-                border-top: 1px solid #e0e0e0;
-                background-color: #ffffff;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
-
-        
-    @media screen {
-        .first-page-only {
-      top: 0;
-      background: white;
-      z-index: 50;
-      padding: 1rem 0;
-
-        }
-      }
-
-      @media print {
-        .first-page-only {
-          display: block !important;
-          position: static !important;
-            }
-          }
     
     </style>
 </head>
@@ -455,7 +475,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="input-group">
                     <label for="clientName">Client Name:</label>
-                    <input type="text" id="clientName" value="HY-Vac Technologies Inc" class="rounded-lg">
+                    <input type="text" id="clientName" class="rounded-lg">
                 </div>
                 <div class="input-group">
                     <label for="agreementMonths">Agreement Months:</label>
@@ -481,6 +501,291 @@
                 </p>
             </div>
 
+            <!--Plan Table-->
+            <table>
+                <tr>
+                    <th style="border: none; background: none; pointer-events: none;"></th>
+                    <th colspan="4" style="text-align: center; pointer-events: none; font-size: xx-large; font-weight: 700;"> Plans </th>
+                </tr>
+  <tr>
+    <th style="text-align: center; text-transform: none; font-size: large;">Service</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">Security Basics</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">Security Standards</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">CoreSTACK</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">CyberSTACK</th>
+  </tr>
+  <tr>
+    <td>Server and Workstation Monitoring</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>System Administration and Maintenance</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Windows Patching</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>End Point Detection & Response</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Managed Extended Detection & Response</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Security Information & Event Management (SIEM) (7 Day)</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Critical Vulnerability & Exceptions (CVE) Scanning</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Automated CVE Patching</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Privilege Access Management (PAM)</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Unlimited Support</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Vendor Support</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Existing Firewall Management</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Secure Access Service Edge (SASE)</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>SIEM (30 Day)</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Security & Awareness Training Platform</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Dark Web Monitoring</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Simulated Phishing</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Email Backup</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Email Advanced Attack Protection</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Email Monitoring</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Malicious File Monitoring</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Multifactor Authentication (MFA)</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>SIEM (90 Day)</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Password Manager</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Microsoft Premium License</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Workstation Backup</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Server Backup</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Mobile Device Management</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Microsoft Intune Workstation Management</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Single Sign On (SSO)</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Password-less Authentication</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Conditional Access Policies</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Annual Tabletop Incident Response Exercise</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>CIO/CISO - As Needed</td>
+    <td>$20/month</td>
+    <td>$20/month</td>
+    <td>$20/month</td>
+    <td>$20/month</td>
+  </tr>
+    <tr>
+    <td>Quarterly Business Risk Reviews</td>
+    <td>$20/month</td>
+    <td>$20/month</td>
+    <td>$20/month</td>
+    <td>$20/month</td>
+  </tr>
+    <tr>
+    <td>Annual Automated Penetration Testing</td>
+    <td>$40/month</td>
+    <td>$40/month</td>
+    <td>$40/month</td>
+    <td>$40/month</td>
+  </tr>
+    <tr>
+    <td>Hardware Firewall</td>
+    <td>$120/month</td>
+    <td>$120/month</td>
+    <td>$120/month</td>
+    <td>$120/month</td>
+  </tr>
+    <tr style="font-weight: bolder; font-size: larger; ">
+    <td>Flate Rate Pricing</td>
+    <td>$85.00</td>
+    <td>$200.00</td>
+    <td>$300.00</td>
+    <td>$365.00</td>
+    </tr>
+    <th colspan="2" style="border: none; background: none; pointer-events: none;"></th>
+    <th colspan="3" style="text-align: center; pointer-events: none; text-transform: none;"> 5 User Minimum </th>
+
+
+</table>
+
             <div class="page-break"></div>
 
             <!-- Repeated Header for NEEDS ASSESSMENT page -->
@@ -498,17 +803,7 @@
             </div>
             <div class="content-after-header">
                 <h2 class="section-title" contenteditable="true">NEEDS ASSESSMENT</h2>
-                <textarea id="needsAssessmentText" class="w-full p-2 border rounded-md" rows="20">HY-Vac Technologies Inc is pursuing an enhanced cybersecurity posture to ensure robust
-protection across both its internal network and cloud-hosted infrastructure. This proposal seeks
-not only to address HY-Vac Technologies' internal security requirements but also to align with
-the evolving needs of HY-Vac Technologies' clients. Additionally, the initiative aims to resolve
-historical performance issues by strengthening infrastructure reliability and security.
-
-As part of this effort, we propose implementing our Security Basics and executing several key
-projects. These include:
-Cloud Infrastructure Security: Locking down and securing the cloud and server
-infrastructure to enhance protection for web applications accessed by clients.
-In-office network remediation, including wireless and perimeter security.</textarea>
+                <textarea id="needsAssessmentText" class="w-full p-2 border rounded-md" rows="10"> Needs Assessment goes here</textarea>
             </div>
 
             <div class="page-break"></div>
