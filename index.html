@@ -409,6 +409,21 @@
                 print-color-adjust: exact;
             }
         }
+
+        
+    @media screen {
+        .first-page-only {
+          display: block;
+        }
+      }
+
+      @media print {
+        .first-page-only {
+          display: block !important;
+          position: static !important;
+            }
+          }
+    
     </style>
 </head>
 <body>
@@ -417,15 +432,17 @@
         <div class="w-full h-12 mb-6 blue-bar-top-print" style="background-color: #0062ff;"></div>
 
         <!-- Header Section (only one instance) - now with a specific class for print styling -->
-        <div class="header-section header-section-print">
-            <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
-            <div>
-                <p>33131 Schoolcraft Road</p>
-                <p>Livonia, MI 48150</p>
-                <p>734-744-5300</p>
-                <p><a href="https://stackcyber.com" class="text-blue-600 hover:underline">https://stackcyber.com</a></p>
+        <header class= "first-page-only print:block hidden">
+            <div class="header-section header-section-print">
+                <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
+                <div>
+                    <p>33131 Schoolcraft Road</p>
+                    <p>Livonia, MI 48150</p>
+                    <p>734-744-5300</p>
+                    <p><a href="https://stackcyber.com" class="text-blue-600 hover:underline">https://stackcyber.com</a></p>
+                </div>
             </div>
-        </div>
+        </header>    
 
         <!-- Content after header - now with a specific class for print styling -->
         <div class="content-after-header content-after-header-print">
