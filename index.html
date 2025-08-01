@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STACK Cybersecurity Quote</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -31,8 +30,8 @@
             margin-bottom: 30px;
         }
         .header-section img {
-            max-height: 160px; /* Increased image size to double */
-            width: auto; /* Ensure image scales proportionally */
+            max-height: 160px;
+            width: auto;
         }
         .header-section div {
             text-align: right;
@@ -42,14 +41,14 @@
         .section-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #ffffff; /* Changed text color to white for contrast */
-            background-color: #0062ff; /* Changed to dark blue #0062ff */
-            padding: 10px 15px; /* Added padding to make it a bar */
+            color: #ffffff;
+            background-color: #0062ff;
+            padding: 10px 15px;
             margin-bottom: 20px;
-            border-radius: 8px; /* Slightly rounded corners for the bar */
-            display: inline-block; /* Ensures background only covers text width */
-            width: 100%; /* Make it span full width */
-            box-sizing: border-box; /* Include padding in width */
+            border-radius: 8px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
         }
         .input-group {
             margin-bottom: 15px;
@@ -62,9 +61,9 @@
         }
         .input-group input[type="number"],
         .input-group input[type="text"],
-        .input-group input[type="date"], /* Added date type */
+        .input-group input[type="date"],
         .input-group textarea,
-        .input-group select { /* Added select to input-group styling */
+        .input-group select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -75,9 +74,9 @@
         }
         .input-group input[type="number"]:focus,
         .input-group input[type="text"]:focus,
-        .input-group input[type="date"]:focus, /* Added date type */
+        .input-group input[type="date"]:focus,
         .input-group textarea:focus,
-        .input-group select:focus { /* Added select to focus styling */
+        .input-group select:focus {
             outline: none;
             border-color: #3498db;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
@@ -88,34 +87,57 @@
             margin-bottom: 25px;
             background-color: #fdfdfd;
             border-radius: 8px;
-            overflow: hidden; /* Ensures rounded corners apply to content */
+            overflow: hidden;
         }
         table th, table td {
             border: 1px solid #e0e0e0;
             padding: 12px 15px;
             text-align: left;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Text wrapping for description and license columns */
+        #monthlyRecurringTable td:nth-child(2),
+        #monthlyRecurringTable td:nth-child(3),
+        #oneTimeCostTable td:nth-child(2),
+        #oneTimeCostTable td:nth-child(3) {
+            white-space: normal;
+            word-break: break-word;
+        }
+        
+        /* Make item detail textareas look good */
+        .item-detail-input {
+            white-space: normal !important;
+            word-break: break-word !important;
+            resize: none;
+            overflow: hidden;
+            line-height: 1.4;
+            font-family: inherit;
+            width: 100%;
         }
         table th {
-            background-color: #eff6ff; /* Tailwind bg-blue-50 */
-            color: #2563eb; /* Tailwind text-blue-700 */
+            background-color: #eff6ff;
+            color: #2563eb;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.85rem;
         }
+        
         table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
         table tr:hover {
-            background-color: #f0f8ff; /* Light blue hover */
+            background-color: #f0f8ff;
         }
         .total-row td {
             font-weight: 700;
-            background-color: #e0f2fe; /* Tailwind bg-blue-100 */
-            color: #1e40af; /* Tailwind text-blue-800 */
+            background-color: #e0f2fe;
+            color: #1e40af;
             font-size: 1.1rem;
         }
         .grand-total-section {
-            background-color: #dbeafe; /* Tailwind bg-blue-200 */
+            background-color: #dbeafe;
             padding: 20px;
             border-radius: 12px;
             margin-top: 30px;
@@ -133,7 +155,7 @@
         .grand-total-section div:last-child {
             margin-bottom: 0;
             padding-top: 10px;
-            border-top: 1px solid #93c5fd; /* Tailwind border-blue-300 */
+            border-top: 1px solid #93c5fd;
         }
 
         .button-group {
@@ -150,7 +172,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 0 5px; /* Added margin for buttons */
+            margin: 0 5px;
         }
         .button-group button:hover {
             background-color: #2980b9;
@@ -182,7 +204,7 @@
             color: #555;
         }
         .delete-row-btn {
-            background-color: #ef4444; /* Red color for delete */
+            background-color: #ef4444;
             color: white;
             padding: 4px 8px;
             border: none;
@@ -195,270 +217,499 @@
         .delete-row-btn:hover {
             background-color: #dc2626;
         }
+        .delete-row-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        /* Hide repeated headers on screen */
+        .repeated-print-header {
+            display: none;
+        }
+        
+        /* Delete column header styling */
+        .delete-column-header {
+            text-align: center !important;
+            text-transform: none !important;
+            font-size: 0.75rem !important;
+        }
+        
+        /* Hide page break on screen */
+        .page-break-before-plans {
+            display: none;
+        }
+        
         /* Print specific styles */
         @media print {
-                 /* Reset body margins and background for print */
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: white;
-    }
-    
-    /* Container adjustments - reduced padding for more content space */
-    .container {
-        max-width: 100%;
-        margin: 0;
-        padding: 15px;
-        box-shadow: none;
-        border-radius: 0;
-    }
-    
-    /* Reduce header section sizing */
-    .header-section {
-        padding-bottom: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .header-section img {
-        max-height: 80px; /* Reduced from 160px */
-        width: auto;
-    }
-    
-    .header-section div {
-        font-size: 0.75rem; /* Reduced from 0.9rem */
-    }
-    
-    /* Main title sizing */
-    h1 {
-        font-size: 1.5rem !important; /* Reduced from 2.5rem (text-4xl) */
-        margin-bottom: 15px !important;
-    }
-    
-    /* Section titles - significantly reduced */
-    .section-title {
-        font-size: 1.1rem !important; /* Reduced from 1.8rem */
-        padding: 8px 12px !important; /* Reduced padding */
-        margin-bottom: 15px !important;
-    }
-    
-    /* Hide elements that shouldn't print */
-    .button-group,
-    .add-row-btn,
-    .delete-row-btn,
-    .print-footer {  /* Hide footer completely */
-        display: none !important;
-    }
-    
-    /* Ensure inputs and textareas print their values */
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    textarea,
-    select {
-        border: none !important;
-        background-color: transparent !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        font-size: 0.85rem; /* Slightly smaller for print */
-    }
-    
-    /* Label font size */
-    .input-group label {
-        font-size: 0.8rem;
-        font-weight: 500;
-    }
-    
-    /* Make sure input values are visible */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    
-    /* Page break controls */
-    .page-break {
-        page-break-before: always;
-        break-before: always;
-    }
-    
-    /* Avoid breaks inside critical elements */
-    table,
-    .grand-total-section,
-    .acceptance-section {
-        page-break-inside: avoid;
-        break-inside: avoid;
-    }
-    
-    /* Header handling for first page */
-    .first-page-only {
-        display: block;
-    }
-    
-    /* Hide repeated headers by default */
-    .repeated-print-header {
-        display: none;
-    }
-    
-    /* Show repeated headers after page breaks */
-    .page-break + .repeated-print-header {
-        display: block;
-        page-break-inside: avoid;
-    }
-    
-    /* Ensure content after headers doesn't break */
-    .content-after-header {
-        page-break-inside: avoid;
-    }
-    
-    /* Table styling for print */
-    table {
-        width: 100%;
-        font-size: 0.75rem; /* Reduced from 0.9rem */
-    }
-    
-    table th,
-    table td {
-        padding: 6px 8px; /* Reduced padding */
-        font-size: 0.75rem;
-    }
-    
-    /* Table headers */
-    table th {
-        font-size: 0.7rem !important; /* Smaller headers */
-        text-transform: uppercase;
-    }
-    
-    /* Plans table header adjustments */
-    table tr th[colspan="4"] {
-        font-size: 1.2rem !important; /* Reduced from 1.8rem */
-        padding: 10px !important;
-    }
-    
-    table tr th[style*="font-size: large"] {
-        font-size: 0.85rem !important; /* Override inline large font */
-    }
-    
-    /* Total rows */
-    .total-row td {
-        font-size: 0.85rem !important; /* Reduced from 1.1rem */
-        font-weight: 600;
-    }
-    
-    /* Grand total section */
-    .grand-total-section {
-        padding: 15px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .grand-total-section div {
-        font-size: 0.95rem !important; /* Reduced from 1.3rem */
-        margin-bottom: 8px;
-    }
-    
-    /* Ensure colored elements print correctly */
-    .section-title,
-    .total-row td,
-    .grand-total-section,
-    table th {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-    
-    /* Blue bar at top of pages */
-    .blue-bar-top-print,
-    .repeated-print-header > div:first-child {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        height: 30px !important; /* Reduced from 40px */
-        background-color: #0062ff !important;
-    }
-    
-    /* Ensure checkmarks and crosses print correctly */
-    td[style*="color: green"],
-    td[style*="color: red"] {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        font-weight: bold;
-        font-size: 0.9rem; /* Reduced from 1.1rem */
-    }
-    
-    /* Signature lines */
-    .signature-line {
-        border-bottom: 1px solid #000;
-        min-height: 25px;
-        margin-bottom: 8px;
-        font-size: 0.75rem;
-    }
-    
-    /* Ensure links print in black */
-    a {
-        color: #000 !important;
-        text-decoration: none !important;
-        font-size: 0.8rem;
-    }
-    
-    /* Make readonly inputs look normal */
-    input[readonly],
-    .bg-gray-100 {
-        background-color: transparent !important;
-    }
-    
-    /* Hide any hover effects */
-    table tr:hover {
-        background-color: transparent !important;
-    }
-    
-    /* Needs Assessment textarea styling */
-    #needsAssessmentText {
-        min-height: 200px; /* Reduced from 300px */
-        resize: none;
-        font-family: inherit;
-        line-height: 1.4;
-        font-size: 0.85rem;
-    }
-    
-    /* About section text */
-    .section p {
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-    
-    /* Acceptance section */
-    .acceptance-section p {
-        font-size: 0.85rem;
-        margin-bottom: 15px;
-    }
-    
-    /* Hide empty table cells in print */
-    td:empty {
-        border: none !important;
-    }
-    
-    /* Page margins - adjusted for better right margin */
-    @page {
-        margin: 0.5in 0.5in 0.5in 0.75in; /* top, right, bottom, left */
-        size: letter portrait;
-    }
-    
-    /* First page special handling */
-    @page:first {
-        margin-top: 0.5in;
-    }
+            /* Show page break only in print */
+            .page-break-before-plans {
+                display: block !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
+            /* Reset body margins and background for print */
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            
+            /* Container adjustments */
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 10px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            /* Reduce header section sizing */
+            .header-section {
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .header-section img {
+                max-height: 80px;
+                width: auto;
+            }
+            
+            .header-section div {
+                font-size: 0.75rem;
+            }
+            
+            /* Main title sizing */
+            h1 {
+                font-size: 1.5rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            /* Section titles */
+            .section-title {
+                font-size: 1.1rem !important;
+                padding: 8px 12px !important;
+                margin-bottom: 15px !important;
+            }
+            
+            /* Hide elements that shouldn't print */
+            .button-group,
+            .add-row-btn,
+            .delete-row-btn,
+            .delete-column,
+            .delete-column-header,
+            .print-footer {
+                display: none !important;
+            }
+            
+            /* Ensure inputs and textareas print their values */
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            textarea,
+            select {
+                border: none !important;
+                background-color: transparent !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                font-size: 0.85rem;
+            }
+            
+            /* Label font size */
+            .input-group label {
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+            
+            /* Make sure input values are visible */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            
+            /* Page break controls */
+            .page-break {
+                page-break-before: always;
+                break-before: always;
+            }
+            
+            /* Avoid breaks inside critical elements */
+            table,
+            .grand-total-section,
+            .acceptance-section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            /* Header handling for first page */
+            .first-page-only {
+                display: block;
+            }
+            
+            /* Show repeated headers in print */
+            .repeated-print-header {
+                display: block !important;
+            }
+            
+            /* Hide repeated headers by default */
+            .repeated-print-header {
+                display: none;
+            }
+            
+            /* Show repeated headers after page breaks */
+            .page-break + .repeated-print-header {
+                display: block;
+                page-break-inside: avoid;
+            }
+            
+            /* Ensure content after headers doesn't break */
+            .content-after-header {
+                page-break-inside: avoid;
+            }
+            
+            /* Table styling for print */
+            table {
+                width: 100%;
+                font-size: 0.85rem;
+                table-layout: auto;
+                margin-bottom: 20px;
+                border-collapse: collapse;
+            }
+            
+            /* Default table styles */
+            table th,
+            table td {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                line-height: 1.3;
+                border: 1px solid #e0e0e0;
+            }
+            
+            /* Plans table specific styling */
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) th,
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td {
+                font-size: 0.7rem !important;
+                padding: 6px 8px !important;
+            }
+            
+            /* Plans table column widths */
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td:first-child {
+                width: 40%;
+            }
+            
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td:nth-child(2),
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td:nth-child(3),
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td:nth-child(4) {
+                width: 20%;
+                text-align: center;
+            }
+            
+            /* Smaller font size for 2nd and 3rd tables */
+            #monthlyRecurringTable th,
+            #monthlyRecurringTable td,
+            #oneTimeCostTable th,
+            #oneTimeCostTable td {
+                font-size: 0.65rem !important;
+            }
+            
+            /* Also apply smaller font to all inputs, selects, and displays within these tables */
+            #monthlyRecurringTable input,
+            #monthlyRecurringTable select,
+            #monthlyRecurringTable .license-display,
+            #monthlyRecurringTable .row-total,
+            #oneTimeCostTable input,
+            #oneTimeCostTable select,
+            #oneTimeCostTable textarea,
+            #oneTimeCostTable .item-detail-input,
+            #oneTimeCostTable .row-total {
+                font-size: 0.65rem !important;
+            }
+            
+            /* Force text wrapping in specific columns */
+            #monthlyRecurringTable td:nth-child(2),
+            #monthlyRecurringTable td:nth-child(3),
+            #oneTimeCostTable td:nth-child(2),
+            #oneTimeCostTable td:nth-child(3) {
+                white-space: normal !important;
+                word-break: break-word !important;
+                overflow-wrap: break-word !important;
+                max-width: 200px;
+            }
+            
+            /* Special handling for item detail textareas in print */
+            #oneTimeCostTable .item-detail-input {
+                white-space: normal !important;
+                overflow: visible !important;
+                height: auto !important;
+                resize: none !important;
+                line-height: 1.4;
+                padding: 2px !important;
+                display: block !important;
+                width: 100% !important;
+                word-break: break-word !important;
+                overflow-wrap: break-word !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            /* Make the cell containing the input expand to fit content */
+            #oneTimeCostTable td:nth-child(3) {
+                height: auto !important;
+                min-height: 30px;
+            }
+            
+            /* Ensure select and input elements in tables wrap text */
+            table select,
+            table input[type="text"] {
+                white-space: normal !important;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            
+            /* Specific column widths for better spacing */
+            #monthlyRecurringTable th:nth-child(1),
+            #monthlyRecurringTable td:nth-child(1),
+            #oneTimeCostTable th:nth-child(1),
+            #oneTimeCostTable td:nth-child(1) {
+                width: 10%;
+            }
+            
+            #monthlyRecurringTable th:nth-child(2),
+            #monthlyRecurringTable td:nth-child(2),
+            #oneTimeCostTable th:nth-child(2),
+            #oneTimeCostTable td:nth-child(2) {
+                width: 30%;
+            }
+            
+            #monthlyRecurringTable th:nth-child(3),
+            #monthlyRecurringTable td:nth-child(3),
+            #oneTimeCostTable th:nth-child(3),
+            #oneTimeCostTable td:nth-child(3) {
+                width: 30%;
+            }
+            
+            #monthlyRecurringTable th:nth-child(4),
+            #monthlyRecurringTable td:nth-child(4),
+            #oneTimeCostTable th:nth-child(4),
+            #oneTimeCostTable td:nth-child(4) {
+                width: 15%;
+            }
+            
+            #monthlyRecurringTable th:nth-child(5),
+            #monthlyRecurringTable td:nth-child(5),
+            #oneTimeCostTable th:nth-child(5),
+            #oneTimeCostTable td:nth-child(5) {
+                width: 15%;
+            }
+            
+            /* Table headers */
+            table th {
+                font-size: 0.75rem !important;
+                text-transform: uppercase;
+                background-color: #eff6ff !important;
+                border: 1px solid #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Plans table header adjustments */
+            table tr th[colspan="4"] {
+                font-size: 1rem !important;
+                padding: 8px !important;
+                text-align: center !important;
+                background-color: #eff6ff !important;
+                border: 1px solid #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Empty header cell that spans the first column */
+            table tr:first-child th:first-child {
+                background-color: transparent !important;
+                border: none !important;
+            }
+            
+            /* Solution, Current Tool, Plan columns headers */
+            table tr th[style*="font-size: large"] {
+                font-size: 0.7rem !important;
+                padding: 6px 8px !important;
+                text-align: center !important;
+                background-color: #eff6ff !important;
+                border: 1px solid #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Plans table specific - make checkmarks and crosses visible */
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td[style*="color: green"],
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) td[style*="color: red"] {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                font-weight: bold !important;
+                font-size: 0.8rem !important;
+            }
+            
+            /* Plans table last row styling (pricing row) */
+            table:not(#monthlyRecurringTable):not(#oneTimeCostTable) tr[style*="font-weight: bolder"] td {
+                font-weight: 700 !important;
+                font-size: 0.75rem !important;
+                background-color: #e0f2fe !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            /* Add-ons table styling */
+            table:nth-of-type(2):not(#monthlyRecurringTable):not(#oneTimeCostTable) th {
+                font-size: 0.7rem !important;
+                background-color: #eff6ff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            table:nth-of-type(2):not(#monthlyRecurringTable):not(#oneTimeCostTable) td {
+                font-size: 0.65rem !important;
+            }
+            
+            /* Total rows */
+            .total-row td {
+                font-size: 0.85rem !important;
+                font-weight: 600;
+            }
+            
+            /* Grand total section */
+            .grand-total-section {
+                padding: 15px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .grand-total-section div {
+                font-size: 0.95rem !important;
+                margin-bottom: 8px;
+            }
+            
+            /* Ensure colored elements print correctly */
+            .section-title,
+            .total-row td,
+            .grand-total-section,
+            table th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            /* Blue bar at top of pages */
+            .blue-bar-top-print,
+            .repeated-print-header > div:first-child {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                height: 30px !important;
+                background-color: #0062ff !important;
+                border-radius: 8px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            /* Ensure checkmarks and crosses print correctly */
+            td[style*="color: green"],
+            td[style*="color: red"] {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                font-weight: bold;
+                font-size: 0.8rem;
+            }
+            
+            /* Signature lines */
+            .signature-line {
+                border-bottom: 1px solid #000;
+                min-height: 25px;
+                margin-bottom: 8px;
+                font-size: 0.75rem;
+            }
+            
+            /* Ensure links print in black */
+            a {
+                color: #000 !important;
+                text-decoration: none !important;
+                font-size: 0.8rem;
+            }
+            
+            /* Make readonly inputs look normal */
+            input[readonly],
+            .bg-gray-100 {
+                background-color: transparent !important;
+            }
+            
+            /* Hide any hover effects */
+            table tr:hover {
+                background-color: transparent !important;
+            }
+            
+            /* Needs Assessment textarea styling */
+            #needsAssessmentText {
+                min-height: 200px;
+                resize: none;
+                font-family: inherit;
+                line-height: 1.4;
+                font-size: 0.85rem;
+            }
+            
+            /* About section text */
+            .section p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+            
+            /* Acceptance section */
+            .acceptance-section p {
+                font-size: 0.85rem;
+                margin-bottom: 15px;
+            }
+            
+            /* Hide empty table cells in print */
+            td:empty {
+                border: none !important;
+            }
+            
+            /* Page margins */
+            @page {
+                margin: 0.4in;
+                size: letter portrait;
+            }
+            
+            /* First page special handling */
+            @page:first {
+                margin-top: 0.4in;
+            }
+            
+            /* Fix for plans table borders and structure */
+            table {
+                border-spacing: 0;
+            }
+            
+            /* Ensure all table cells have proper borders in print */
+            table td,
+            table th {
+                border: 1px solid #e0e0e0 !important;
+            }
+            
+            /* Hide empty cells borders */
+            table th[style*="border: none"],
+            table td:empty {
+                border: none !important;
+            }
+        }
 
     
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Blue bar above the main header - now with a specific class for print styling -->
-        <div class="w-full h-12 mb-6 blue-bar-top-print" style="background-color: #0062ff;"></div>
+        <div class="w-full h-12 mb-6 blue-bar-top-print" style="background-color: #0062ff; border-radius: 8px;"></div>
 
-        <!-- Header Section (only one instance) - now with a specific class for print styling -->
         <header class= "first-page-only print:block">
             <div class="header-section header-section-print">
-                <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
+                <img src="https://stackcyber.com/img/logos/stack-cybersecurity-logo.svg" alt="Company Logo">
                 <div>
                     <p>33131 Schoolcraft Road</p>
                     <p>Livonia, MI 48150</p>
@@ -468,7 +719,6 @@
             </div>
         </header>    
 
-        <!-- Content after header - now with a specific class for print styling -->
         <div class="content-after-header content-after-header-print">
             <h1 class="text-4xl font-bold text-gray-800 mb-6">Cybersecurity Managed Service Proposal</h1>
 
@@ -501,298 +751,307 @@
                 </p>
             </div>
 
+            <!-- Page break before Plans table to prevent blank first page -->
+            <div class="page-break-before-plans" style="page-break-before: always;"></div>
+
+            <!-- Repeated Header for PLANS page (only shows in print) -->
+            <div class="repeated-print-header ">
+                <div class="w-full h-12" style="background-color: #0062ff; border-radius: 8px;"></div>
+                <div class="header-section header">
+                    <img src="https://stackcyber.com/img/logos/stack-cybersecurity-logo.svg" alt="Company Logo">
+                    <div>
+                        <p>33131 Schoolcraft Road</p>
+                        <p>Livonia, MI 48150</p>
+                        <p>734-744-5300</p>
+                        <p><a href="https://stackcyber.com" class="text-blue-600 hover:underline">https://stackcyber.com</a></p>
+                    </div>
+                </div>
+            </div>
+
             <!--Plan Table-->
             <table>
                 <tr>
                     <th style="border: none; background: none; pointer-events: none;"></th>
-                    <th colspan="4" style="text-align: center; pointer-events: none; font-size: xx-large; font-weight: 700;"> Plans </th>
+                    <th style="border: none; background: none; pointer-events: none;"></th>
+                    <th colspan="2" style="text-align: center; pointer-events: none; font-size: xx-large; font-weight: 700;"> Plans </th>
                 </tr>
   <tr>
-    <th style="text-align: center; text-transform: none; font-size: large;">Service</th>
-    <th style="text-align: center; text-transform: none; font-size: large;">Security Basics</th>
-    <th style="text-align: center; text-transform: none; font-size: large;">Security Standards</th>
-    <th style="text-align: center; text-transform: none; font-size: large;">CoreSTACK</th>
-    <th style="text-align: center; text-transform: none; font-size: large;">CyberSTACK</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">Solution</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">Current Tool</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">Managed Service Core</th>
+    <th style="text-align: center; text-transform: none; font-size: large;">Managed Service Advanced</th>
   </tr>
   <tr>
     <td>Server and Workstation Monitoring</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - EXPRESS</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
     <td>System Administration and Maintenance</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - EXPRESS</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
     <td>Windows Patching</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>End Point Detection & Response</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - EXPRESS</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Managed Extended Detection & Response</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Security Information & Event Management (SIEM) (7 Day)</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
+    <td>End Point Detection & Response/NGAV</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - EXPRESS</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Critical Vulnerability & Exceptions (CVE) Scanning</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Automated CVE Patching</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
+    <td>Workstation Backup</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - EXPRESS</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Privilege Access Management (PAM)</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Unlimited Support</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Vendor Support</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Existing Firewall Management</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Secure Access Service Edge (SASE)</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>SIEM (30 Day)</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Security & Awareness Training Platform</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td>Phishing, Security & Awareness Training Platform</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - USER</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
     <td>Dark Web Monitoring</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - USER</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Simulated Phishing</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td>Email Security and Filtering</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - USER</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Email Backup</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Email Advanced Attack Protection</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Email Monitoring</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td>M365 Backup (Email, SharePoint, Teams)</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - USER</td>
     <td style="color: green; text-align: center;">&check;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
     <td>Malicious File Monitoring</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - USER</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Microsoft Entra P2 License</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Unlimited Support</td>
+    <td style="text-align: center; text-transform: none;">STACK</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Vendor Support</td>
+    <td style="text-align: center; text-transform: none;">STACK</td>
+    <td style="color: green; text-align: center;">&check;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Firewall Management</td>
+    <td></td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Managed Extended Detection & Response</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - PRO</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>SIEM - 365 Day</td>
+    <td style="text-align: center; text-transform: none;">Kaseya 365 - PRO</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Vulnerability Scanning</td>
+    <td style="text-align: center; text-transform: none;">Kaseya IT Complete</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Automated Critical Vulnerabilities & Exceptions (CVE) Patching</td>
+    <td style="text-align: center; text-transform: none;">Kaseya IT Complete</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Secure Access Service Edge (SASE)</td>
+    <td style="text-align: center; text-transform: none;">Kaseya IT Complete</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>Privelage Access Management (PAM)</td>
+    <td style="text-align: center; text-transform: none;">CyberFox</td>
+    <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
     <td>Multifactor Authentication (MFA)</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>SIEM (90 Day)</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="text-align: center; text-transform: none;">Microsoft Authenticator</td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Password Manager</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Microsoft Premium License</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td>MS Entra Conditional Access</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Workstation Backup</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Server Backup</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td>MS Intune Mobile Device Management (MDM)</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Mobile Device Management</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td>MS Intune Endpoint Security Policies</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
-    <td>Microsoft Intune Workstation Management</td>
+    <td>MS Intune Device Compliance</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>MS Entra Passwordless Authentication</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>MS Entra Authentication Methods</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
+    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="color: green; text-align: center;">&check;</td>
+  </tr>
+    <tr>
+    <td>MS Entra Join and User and Grouop Management</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
   </tr>
     <tr>
     <td>Single Sign On (SSO)</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Password-less Authentication</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
+    <td style="text-align: center; text-transform: none;">Microsoft</td>
     <td style="color: red; text-align: center;">&cross;</td>
     <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Conditional Access Policies</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>Annual Tabletop Incident Response Exercise</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: red; text-align: center;">&cross;</td>
-    <td style="color: green; text-align: center;">&check;</td>
-  </tr>
-    <tr>
-    <td>CIO/CISO - As Needed</td>
-    <td>$20/month</td>
-    <td>$20/month</td>
-    <td>$20/month</td>
-    <td>$20/month</td>
-  </tr>
-    <tr>
-    <td>Quarterly Business Risk Reviews</td>
-    <td>$20/month</td>
-    <td>$20/month</td>
-    <td>$20/month</td>
-    <td>$20/month</td>
-  </tr>
-    <tr>
-    <td>Annual Automated Penetration Testing</td>
-    <td>$40/month</td>
-    <td>$40/month</td>
-    <td>$40/month</td>
-    <td>$40/month</td>
-  </tr>
-    <tr>
-    <td>Hardware Firewall</td>
-    <td>$120/month</td>
-    <td>$120/month</td>
-    <td>$120/month</td>
-    <td>$120/month</td>
-  </tr>
-    <tr style="font-weight: bolder; font-size: larger; ">
-    <td>Flate Rate Pricing</td>
-    <td>$85.00</td>
-    <td>$200.00</td>
-    <td>$300.00</td>
-    <td>$365.00</td>
     </tr>
-    <th colspan="2" style="border: none; background: none; pointer-events: none;"></th>
-    <th colspan="3" style="text-align: center; pointer-events: none; text-transform: none;"> 5 User Minimum </th>
+    <tr style="font-weight: bolder; font-size: larger; ">
+    <td>Per User | Per Month</td>
+    <td>    </td>
+    <td>$225.00</td>
+    <td>$300.00</td>
+    </tr>
+    <th colspan="3" style="border: none; background: none; pointer-events: none;"></th>
+    <th colspan="3" style="text-align: center; pointer-events: none; text-transform: none;"> 5 User Minimum????? </th>
 
 
+</table>
+
+<table>
+    <tr>
+        <th style="text-align: center; text-transform: none; font-size: large;">Add-on</th>
+        <th style="text-align: center; text-transform: none; font-size: large;">Tool</th>
+        <th style="text-align: center; text-transform: none; font-size: large;">Price</th>
+    </tr>
+    <tr>
+        <td>DUO Multifactor Authentication (MFA) - Servers Only</td>
+        <td style="text-align: center; text-transform: none;">Cisco</td>
+        <td style="text-align: center; text-transform: none;">$14.00 Per User | Per Month</td>
+    </tr>
+    <tr>
+        <td>Password Manager - Advanced (Keeper)</td>
+        <td style="text-align: center; text-transform: none;">Keeper</td>
+        <td style="text-align: center; text-transform: none;">$15.00 Per User | Per Month</td>
+    </tr>
+    <tr>
+        <td>Password Manager - Basic (Passwor Boss)</td>
+        <td style="text-align: center; text-transform: none;">CyberFox</td>
+        <td style="text-align: center; text-transform: none;">$10.00 Per User | Per Month</td>
+    </tr>
+    <tr>
+        <td>Microsoft Business Premium</td>
+        <td style="text-align: center; text-transform: none;">Microsoft</td>
+        <td style="text-align: center; text-transform: none;">$22.00 Per User | Per Month</td>
+    </tr>
+    <tr>
+        <td>Manual Critical Vulnerabilities & Exceptions (CVE) Patching</td>
+        <td style="text-align: center; text-transform: none;">Kaseya IT Complete</td>
+        <td style="text-align: center; text-transform: none;">$40.00 Per User | Per Month</td>
+    </tr>
+    <tr>
+        <td>Automated Penetration Testing</td>
+        <td style="text-align: center; text-transform: none;">Vonahi</td>
+        <td style="text-align: center; text-transform: none;">$10.00 Per User | Per Month</td>
+    </tr>
+    <tr>
+        <td>Annual Table Top</td>
+        <td style="text-align: center; text-transform: none;">STACK</td>
+        <td style="text-align: center; text-transform: none;">$750.00 Per Test</td>
+    </tr>
+    <tr>
+        <td>Hardware Firewall</td>
+        <td style="text-align: center; text-transform: none;">Sophos</td>
+        <td style="text-align: center; text-transform: none;">$30.00 Per Firewall | Per Month</td>
+    </tr>
+    <tr>
+        <td>Governance, Rist & Compliance (GRC)</td>
+        <td style="text-align: center; text-transform: none;">Rapid Fire Tools</td>
+        <td style="text-align: center; text-transform: none;">$250.00 Per Org | Per Month</td>
+    </tr>
+    <tr>
+        <td>Business Continuity Disaster Recovery (BCDR) Appliance</td>
+        <td style="text-align: center; text-transform: none;">2 - TB - Siris 5X</td>
+        <td style="text-align: center; text-transform: none;">$159.00 Per Device | Per Month</td>
+    </tr>
+    <tr>
+        <td>Business Continuity Disaster Recovery (BCDR) Appliance</td>
+        <td style="text-align: center; text-transform: none;">4 - TB - Siris 5X-4</td>
+        <td style="text-align: center; text-transform: none;">$179.00 Per Device | Per Month</td>
+    </tr>
+    <tr>
+        <td>Business Continuity Disaster Recovery (BCDR) Appliance</td>
+        <td style="text-align: center; text-transform: none;">4 - TB - Siris S5-4</td>
+        <td style="text-align: center; text-transform: none;">$529.00 Per Device | Per Month</td>
+    </tr>
+    <tr>
+        <td>Business Continuity Disaster Recovery (BCDR) Appliance</td>
+        <td style="text-align: center; text-transform: none;">6 - TB - Siris S5-6</td>
+        <td style="text-align: center; text-transform: none;">$749.00 Per Device | Per Month</td>
+    </tr>
+    <tr>
+        <td>Business Continuity Disaster Recovery (BCDR) Appliance</td>
+        <td style="text-align: center; text-transform: none;">8 - TB - Siris S5-8</td>
+        <td style="text-align: center; text-transform: none;">$869.00 Per Device | Per Month</td>
+    </tr>
 </table>
 
             <div class="page-break"></div>
 
             <!-- Repeated Header for NEEDS ASSESSMENT page -->
             <div class="repeated-print-header">
-                <div class="w-full h-12" style="background-color: #0062ff;"></div>
+                <div class="w-full h-12" style="background-color: #0062ff; border-radius: 8px;"></div>
                 <div class="header-section">
-                    <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
+                    <img src="https://stackcyber.com/img/logos/stack-cybersecurity-logo.svg" alt="Company Logo">
                     <div>
                         <p>33131 Schoolcraft Road</p>
                         <p>Livonia, MI 48150</p>
@@ -810,9 +1069,9 @@
 
             <!-- Repeated Header for PROPOSED COST page -->
             <div class="repeated-print-header">
-                <div class="w-full h-12" style="background-color: #0062ff;"></div>
+                <div class="w-full h-12" style="background-color: #0062ff; border-radius: 8px;"></div>
                 <div class="header-section">
-                    <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
+                    <img src="https://stackcyber.com/img/logos/stack-cybersecurity-logo.svg" alt="Company Logo">
                     <div>
                         <p>33131 Schoolcraft Road</p>
                         <p>Livonia, MI 48150</p>
@@ -821,7 +1080,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content-after-header"> <!-- This content starts on a new page -->
+            <div class="content-after-header">
                 <h2 class="section-title">PROPOSED COST - MONTHLY RECURRING</h2>
                 <p class="text-gray-600 mb-4">Quotation valid for 30 days</p>
 
@@ -833,135 +1092,78 @@
                             <th>DEVICE/LICENSE</th>
                             <th>PRICE</th>
                             <th>TOTAL</th>
-                            <th></th> <!-- For delete button -->
+                            <th class="delete-column-header">REMOVE ROW</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Existing rows will be dynamically generated or can be left as examples -->
-                        <tr>
-                            <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="6" min="0"></td>
-                            <td>
-                                <select class="service-select w-full p-1 border rounded-md">
-                                    <option value="securityBasics">Security Basics</option>
-                                    <option value="securityStandardsPlan">Security Standards (Plan)</option>
-                                    <option value="coreStack">CoreSTACK</option>
-                                    <option value="cyberStack">CyberSTACK</option>
-                                    <option value="securityStandardsServer">Security Standards (Per Server)</option>
-                                    <option value="cioCiso">CIO/CISO - As Needed</option>
-                                    <option value="annualPenTesting">Annual Automated Penetration Testing</option>
-                                    <option value="hardwareFirewall">Hardware Firewall</option>
-                                    <option value="customAddOn">Custom Add-On / Other</option>
-                                </select>
-                            </td>
-                            <td class="license-display"></td>
-                            <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
-                            <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
-                        </tr>
-                        <tr>
+                        <!-- First row with service plans - cannot be deleted -->
+                        <tr class="service-row" data-row-type="service">
                             <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="1" min="0"></td>
                             <td>
-                                <select class="service-select w-full p-1 border rounded-md">
-                                    <option value="securityBasics">Security Basics</option>
-                                    <option value="securityStandardsPlan">Security Standards (Plan)</option>
-                                    <option value="coreStack">CoreSTACK</option>
-                                    <option value="cyberStack">CyberSTACK</option>
-                                    <option value="securityStandardsServer" selected>Security Standards (Per Server)</option>
-                                    <option value="cioCiso">CIO/CISO - As Needed</option>
-                                    <option value="annualPenTesting">Annual Automated Penetration Testing</option>
-                                    <option value="hardwareFirewall">Hardware Firewall</option>
-                                    <option value="customAddOn">Custom Add-On / Other</option>
+                                <select class="service-select service-plan-select w-full p-1 border rounded-md">
+                                    <option value="" disabled selected>Select Service</option>
+                                    <option value="MSC">Managed Service Core</option>
+                                    <option value="MSA">Managed Service Advanced</option>
                                 </select>
                             </td>
                             <td class="license-display"></td>
-                            <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
+                            <td class="price-display">$0.00</td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn" disabled>X</button></td>
                         </tr>
-                        <tr>
-                            <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="1" min="0"></td>
-                            <td>
-                                <select class="service-select w-full p-1 border rounded-md">
-                                    <option value="securityBasics">Security Basics</option>
-                                    <option value="securityStandardsPlan">Security Standards (Plan)</option>
-                                    <option value="coreStack">CoreSTACK</option>
-                                    <option value="cyberStack">CyberSTACK</option>
-                                    <option value="securityStandardsServer">Security Standards (Per Server)</option>
-                                    <option value="cioCiso" selected>CIO/CISO - As Needed</option>
-                                    <option value="annualPenTesting">Annual Automated Penetration Testing</option>
-                                    <option value="hardwareFirewall">Hardware Firewall</option>
-                                    <option value="customAddOn">Custom Add-On / Other</option>
-                                </select>
-                            </td>
-                            <td class="license-display"></td>
-                            <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
-                            <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
-                        </tr>
-                        <tr>
-                            <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="1" min="0"></td>
-                            <td>
-                                <select class="service-select w-full p-1 border rounded-md">
-                                    <option value="securityBasics">Security Basics</option>
-                                    <option value="securityStandardsPlan">Security Standards (Plan)</option>
-                                    <option value="coreStack">CoreSTACK</option>
-                                    <option value="cyberStack">CyberSTACK</option>
-                                    <option value="securityStandardsServer">Security Standards (Per Server)</option>
-                                    <option value="cioCiso">CIO/CISO - As Needed</option>
-                                    <option value="annualPenTesting" selected>Annual Automated Penetration Testing</option>
-                                    <option value="hardwareFirewall">Hardware Firewall</option>
-                                    <option value="customAddOn">Custom Add-On / Other</option>
-                                </select>
-                            </td>
-                            <td class="license-display"></td>
-                            <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
-                            <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
-                        </tr>
-                        <tr>
+                        <!-- Add-on row -->
+                        <tr class="addon-row" data-row-type="addon">
                             <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="0" min="0"></td>
                             <td>
-                                <select class="service-select w-full p-1 border rounded-md">
-                                    <option value="securityBasics">Security Basics</option>
-                                    <option value="securityStandardsPlan">Security Standards (Plan)</option>
-                                    <option value="coreStack">CoreSTACK</option>
-                                    <option value="cyberStack">CyberSTACK</option>
-                                    <option value="securityStandardsServer">Security Standards (Per Server)</option>
-                                    <option value="cioCiso">CIO/CISO - As Needed</option>
-                                    <option value="annualPenTesting">Annual Automated Penetration Testing</option>
-                                    <option value="hardwareFirewall" selected>Hardware Firewall</option>
-                                    <option value="customAddOn">Custom Add-On / Other</option>
+                                <select class="service-select addon-select w-full p-1 border rounded-md">
+                                    <option value="" disabled selected>Select Add-on</option>
+                                    <option value="TAR">Technology Alignment Review</option>
+                                    <option value="vCIO/vCISO">vCIO/vCISO - As Needed</option>
+                                    <option value="DUOMFA">DUO Multifactor Authentication (MFA)</option>
+                                    <option value="KEEPER">Password Manager - Advanced (Keeper)</option>
+                                    <option value="PBOSS">Password Manager - Basic (Password Boss)</option>
+                                    <option value="M365">Microsoft Business Premium</option>
+                                    <option value="CVE">Manual Critical Vulnerabilities & Exceptions (CVE) Patching</option>
+                                    <option value="APT">Automated Penetration Testing</option>
+                                    <option value="ATT">Annual Table Top</option>
+                                    <option value="HFW">Hardware Firewall</option>
+                                    <option value="GRC">Governance, Risk & Compliance (GRC)</option>
+                                    <option value="BCDR2">BCDR Appliance 2 TB SIRIS 5X</option>
+                                    <option value="BCDR4">BCDR Appliance 4 TB SIRIS 5X-4</option>
+                                    <option value="BCDR42">BCDR Appliance 4 TB SIRIS S5-4</option>
+                                    <option value="BCDR6">BCDR Appliance 6 TB SIRIS S5-6</option>
+                                    <option value="BCDR8">BCDR Appliance 8 TB SIRIS S5-8</option>
                                 </select>
                             </td>
                             <td class="license-display"></td>
-                            <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
+                            <td class="price-display">$0.00</td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr class="total-row">
                             <td colspan="4" class="text-right">Total Monthly Recurring Charge</td>
                             <td id="totalMonthlyRecurring">$0.00</td>
-                            <td></td>
+                            <td class="delete-column"></td>
                         </tr>
                         <tr class="total-row">
                             <td colspan="4" class="text-right">Total Annual Recurring Charge</td>
                             <td id="totalAnnualRecurring">$0.00</td>
-                            <td></td>
+                            <td class="delete-column"></td>
                         </tr>
                     </tfoot>
                 </table>
-                <button type="button" id="addMonthlyRow" class="add-row-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mb-8">Add Monthly Service</button>
-            </div> <!-- End content for Page 2 -->
+                <button type="button" id="addMonthlyRow" class="add-row-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mb-8">Add Add-on</button>
+            </div>
 
             <div class="page-break"></div>
 
             <!-- Repeated Header for ONE TIME COST page -->
             <div class="repeated-print-header">
-                <div class="w-full h-12" style="background-color: #0062ff;"></div>
+                <div class="w-full h-12" style="background-color: #0062ff; border-radius: 8px;"></div>
                 <div class="header-section">
-                    <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
+                    <img src="https://stackcyber.com/img/logos/stack-cybersecurity-logo.svg" alt="Company Logo">
                     <div>
                         <p>33131 Schoolcraft Road</p>
                         <p>Livonia, MI 48150</p>
@@ -981,7 +1183,7 @@
                             <th>ITEM DETAIL / LICENSE</th>
                             <th>PRICE</th>
                             <th>TOTAL</th>
-                            <th></th> <!-- For delete button -->
+                            <th class="delete-column-header">REMOVE ROW</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1000,10 +1202,10 @@
                                 </select>
                                 <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                             </td>
-                            <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value="Onboarding Service"></td>
+                            <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="2">Onboarding Service</textarea></td>
                             <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="1310.00"></td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                         <tr>
                             <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="1" min="0"></td>
@@ -1019,10 +1221,10 @@
                                 </select>
                                 <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                             </td>
-                            <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value="Sophos XGS 128 Network Security/Firewall Appliance"></td>
+                            <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="2">Sophos XGS 128 Network Security/Firewall Appliance</textarea></td>
                             <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="1870.87"></td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                         <tr>
                             <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="1" min="0"></td>
@@ -1038,10 +1240,10 @@
                                 </select>
                                 <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                             </td>
-                            <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value="Fire Wall Implementation - Flat Fee"></td>
+                            <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="2">Fire Wall Implementation - Flat Fee</textarea></td>
                             <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="1650.00"></td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -1057,10 +1259,10 @@
                                 </select>
                                 <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                             </td>
-                            <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value="Fire Wall Implementation -Flat Fee Discount (enter negative value)"></td>
+                            <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="2">Fire Wall Implementation -Flat Fee Discount (enter negative value)</textarea></td>
                             <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="-1150.00"></td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -1076,10 +1278,10 @@
                                 </select>
                                 <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                             </td>
-                            <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value="Discount with 60 Month Agreement (enter negative value)"></td>
+                            <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="2">Discount with 60 Month Agreement (enter negative value)</textarea></td>
                             <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="-327.50"></td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -1095,17 +1297,17 @@
                                 </select>
                                 <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                             </td>
-                            <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value=""></td>
+                            <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="1"></textarea></td>
                             <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="211.25"></td>
                             <td class="row-total">$0.00</td>
-                            <td><button class="delete-row-btn">X</button></td>
+                            <td class="delete-column"><button class="delete-row-btn">X</button></td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr class="total-row">
                             <td colspan="4" class="text-right">Total One Time Charge</td>
                             <td id="totalOneTimeCharge">$0.00</td>
-                            <td></td>
+                            <td class="delete-column"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -1127,16 +1329,15 @@
                     </div>
                 </div>
 
-            </div> <!-- End content for Page 3 -->
+            </div>
 
             <div class="page-break"></div>
 
             <!-- Repeated Header for HOURLY OPTIONS page -->
-            <!-- This header is removed as per user request to delete the last header on the last page -->
-            <!-- <div class="repeated-print-header">
-                <div class="w-full h-12" style="background-color: #0062ff;"></div>
+            <div class="repeated-print-header">
+                <div class="w-full h-12" style="background-color: #0062ff; border-radius: 8px;"></div>
                 <div class="header-section">
-                    <img src="https://www.stackcybersecurity.com/img/logos/stack-cybersecurity-og.jpg" alt="Company Logo">
+                    <img src="https://stackcyber.com/img/logos/stack-cybersecurity-logo.svg" alt="Company Logo">
                     <div>
                         <p>33131 Schoolcraft Road</p>
                         <p>Livonia, MI 48150</p>
@@ -1144,7 +1345,7 @@
                         <p><a href="https://stackcyber.com" class="text-blue-600 hover:underline">https://stackcyber.com</a></p>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- Content for Page 4: Hourly Options & Acceptance -->
             <div class="content-after-header">
                 <h2 class="section-title">HOURLY OPTIONS</h2>
@@ -1165,10 +1366,9 @@
                     <div class="signature-line"></div>
                         <p class="text-sm text-gray-600 mt-2"> (Print Name)</p>
                 </div>
-            </div> <!-- End content for Page 4 -->
+            </div>
 
         <div class="button-group">
-            <button onclick="calculateAndDisplay()">Calculate & Update Quote</button>
             <button onclick="window.print()">Print/Save as PDF</button>
         </div>
     </div>
@@ -1179,27 +1379,39 @@
     </div>
 
     <script>
-        // Define monthly plans and their properties
-        const monthlyPlans = {
-            "securityBasics": { name: "Security Basics", unitPrice: 85.00, license: "Per User | Per Month" },
-            "securityStandardsPlan": { name: "Security Standards (Plan)", unitPrice: 200.00, license: "Per User | Per Month" },
-            "coreStack": { name: "CoreSTACK", unitPrice: 300.00, license: "Per User | Per Month" },
-            "cyberStack": { name: "CyberSTACK", unitPrice: 365.00, license: "Per User | Per Month" },
-            "securityStandardsServer": { name: "Security Standards (Per Server)", unitPrice: 85.00, license: "Per Server | Per Month" },
-            "cioCiso": { name: "CIO/CISO - As Needed", unitPrice: 20.00, license: "Flat Rate | Per Month" },
-            "annualPenTesting": { name: "Annual Automated Penetration Testing", unitPrice: 40.00, license: "Flat Rate | Per Month" },
-            "hardwareFirewall": { name: "Hardware Firewall", unitPrice: 120.00, license: "Flat Rate | Per Month" },
-            "customAddOn": { name: "Custom Add-On / Other", unitPrice: 0.00, license: "Custom | Per Month" }
+        // Define service plans and add-ons
+        const servicePlans = {
+            "MSC": { name: "Managed Service Core", unitPrice: 225.00, license: "Per User | Per Month" },
+            "MSA": { name: "Managed Service Advanced", unitPrice: 300.00, license: "Per User | Per Month" },
+        };
+        
+        const addons = {
+            "TAR": { name: "Technology Alignment Review", unitPrice: 0.00, license: "Per User | Per Month" },
+            "vCIO/vCISO": { name: "vCIO/vCISO - As Needed", unitPrice: 0.00, license: "Per User | Per Month" },
+            "DUOMFA": { name: "DUO Multifactor Authentication (MFA)", unitPrice: 14.00, license: "Per User | Per Month" },
+            "KEEPER": { name: "Password Manager - Advanced (Keeper)", unitPrice: 15.00, license: "Per User | Per Month" },
+            "PBOSS": { name: "Password Manager - Basic (Password Boss)", unitPrice: 10.00, license: "Per User | Per Month" },
+            "M365": { name: "Microsoft Business Premium", unitPrice: 22.00, license: "Per User | Per Month" },
+            "CVE": { name: "Manual Critical Vulnerabilities & Exceptions (CVE) Patching", unitPrice: 40.00, license: "Per User | Per Month" },
+            "APT": { name: "Automated Penetration Testing", unitPrice: 10.00, license: "Per User | Per Month" },
+            "ATT": { name: "Annual Table Top", unitPrice: 750.00, license: "Per Test" },
+            "HFW": { name: "Hardware Firewall", unitPrice: 30.00, license: "Per FW | Per Month" },
+            "GRC": { name: "Governance, Risk & Compliance (GRC)", unitPrice: 250.00, license: "Per Org | Per Month" },
+            "BCDR2": { name: "BCDR Appliance 2 TB SIRIS 5X", unitPrice: 159.00, license: "Per Device | Per Month" },
+            "BCDR4": { name: "BCDR Appliance 4 TB SIRIS 5X-4", unitPrice: 179.00, license: "Per Device | Per Month" },
+            "BCDR42": { name: "BCDR Appliance 4 TB SIRIS S5-4", unitPrice: 529.00, license: "Per Device | Per Month" },
+            "BCDR6": { name: "BCDR Appliance 6 TB SIRIS S5-6", unitPrice: 749.00, license: "Per Device | Per Month" },
+            "BCDR8": { name: "BCDR Appliance 8 TB SIRIS S5-8", unitPrice: 869.00, license: "Per Device | Per Month" },
         };
 
         const oneTimeItems = {
-            "onboarding": { description: "Onboarding", itemDetail: "Onboarding project Cloud Infrastructure Security: Locking down and securing the cloud and server infrastructure to enhance protection for web applications accessed by clients. In-office network remediation, including wireless and perimeter security. Security Basics install - 13 Devices", price: 1310.00 },
+            "onboarding": { description: "Onboarding", itemDetail: "Onboarding Service", price: 1310.00 },
             "firewall": { description: "Firewall", itemDetail: "Sophos XGS 128 Network Security/Firewall Appliance", price: 1870.87 },
             "projectImplementation": { description: "Project Implementation", itemDetail: "Fire Wall Implementation - Flat Fee", price: 1650.00 },
             "projectDiscount": { description: "Project Discount", itemDetail: "Fire Wall Implementation -Flat Fee Discount (enter negative value)", price: -1150.00 },
             "onboardingDiscount": { description: "Onboarding Discount", itemDetail: "Discount with 60 Month Agreement (enter negative value)", price: -327.50 },
             "tax": { description: "Tax", itemDetail: "", price: 211.25 },
-            "customOneTime": { description: "Custom Item", itemDetail: "Enter custom item detail", price: 0.00 } // Updated default itemDetail
+            "customOneTime": { description: "Custom Item", itemDetail: "Enter custom item detail", price: 0.00 }
         };
 
         // Function to format numbers as currency
@@ -1212,32 +1424,35 @@
             }).format(amount);
         }
 
-        // Function to create a new monthly recurring row
+        // Function to create a new monthly recurring row (addon)
         function createMonthlyRow() {
             const row = document.createElement('tr');
+            row.className = 'addon-row';
+            row.setAttribute('data-row-type', 'addon');
             row.innerHTML = `
                 <td><input type="number" class="qty-input w-20 p-1 border rounded-md" value="1" min="0"></td>
                 <td>
-                    <select class="service-select w-full p-1 border rounded-md">
-                        ${Object.keys(monthlyPlans).map(key => `<option value="${key}">${monthlyPlans[key].name}</option>`).join('')}
+                    <select class="service-select addon-select w-full p-1 border rounded-md">
+                        <option value="" disabled selected>Select Add-on</option>
+                        ${Object.keys(addons).map(key => `<option value="${key}">${addons[key].name}</option>`).join('')}
                     </select>
                 </td>
                 <td class="license-display"></td>
-                <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
+                <td class="price-display">$0.00</td>
                 <td class="row-total">$0.00</td>
-                <td><button class="delete-row-btn">X</button></td>
+                <td class="delete-column"><button class="delete-row-btn">X</button></td>
             `;
+            
             // Add event listeners to the new elements
             row.querySelector('.qty-input').addEventListener('input', calculateAndDisplay);
             row.querySelector('.service-select').addEventListener('change', (event) => {
-                handleMonthlyServiceChange(event.target);
+                handleServiceChange(event.target);
                 calculateAndDisplay();
             });
-            row.querySelector('.price-input').addEventListener('input', calculateAndDisplay);
             row.querySelector('.delete-row-btn').addEventListener('click', deleteRow);
 
             // Initial setup for the new row
-            handleMonthlyServiceChange(row.querySelector('.service-select'));
+            handleServiceChange(row.querySelector('.service-select'));
             return row;
         }
 
@@ -1252,11 +1467,12 @@
                     </select>
                     <input type="text" class="custom-description-input w-full p-1 border rounded-md hidden" placeholder="Enter custom description">
                 </td>
-                <td><input type="text" class="item-detail-input w-full p-1 border rounded-md" value=""></td>
+                <td><textarea class="item-detail-input w-full p-1 border rounded-md" rows="2"></textarea></td>
                 <td><input type="number" class="price-input w-28 p-1 border rounded-md" step="0.01" value="0.00"></td>
                 <td class="row-total">$0.00</td>
-                <td><button class="delete-row-btn">X</button></td>
+                <td class="delete-column"><button class="delete-row-btn">X</button></td>
             `;
+            
             // Add event listeners to the new elements
             row.querySelector('.qty-input').addEventListener('input', calculateAndDisplay);
             row.querySelector('.one-time-service-select').addEventListener('change', (event) => {
@@ -1264,7 +1480,11 @@
                 calculateAndDisplay();
             });
             row.querySelector('.custom-description-input').addEventListener('input', calculateAndDisplay);
-            row.querySelector('.item-detail-input').addEventListener('input', calculateAndDisplay); // Renamed from license-input
+            const itemDetailTextarea = row.querySelector('.item-detail-input');
+            itemDetailTextarea.addEventListener('input', function() {
+                autoResizeTextarea(this);
+                calculateAndDisplay();
+            });
             row.querySelector('.price-input').addEventListener('input', calculateAndDisplay);
             row.querySelector('.delete-row-btn').addEventListener('click', deleteRow);
 
@@ -1277,30 +1497,43 @@
         function deleteRow(event) {
             const row = event.target.closest('tr');
             row.remove();
-            calculateAndDisplay(); // Recalculate totals after deletion
+            calculateAndDisplay();
         }
 
-        // Handle change event for monthly service select
-        function handleMonthlyServiceChange(selectElement) {
+        // Handle change event for service select
+        function handleServiceChange(selectElement) {
             const row = selectElement.closest('tr');
-            const selectedPlanKey = selectElement.value;
-            const selectedPlan = monthlyPlans[selectedPlanKey];
+            const selectedKey = selectElement.value;
+            const rowType = row.getAttribute('data-row-type');
             const licenseDisplay = row.querySelector('.license-display');
-            const priceInput = row.querySelector('.price-input');
-
-            if (licenseDisplay) {
-                licenseDisplay.textContent = selectedPlan.license;
+            const priceDisplay = row.querySelector('.price-display');
+            
+            // If placeholder is selected, clear the displays
+            if (!selectedKey) {
+                if (licenseDisplay) licenseDisplay.textContent = '';
+                if (priceDisplay) priceDisplay.textContent = '$0.00';
+                calculateAndDisplay();
+                return;
             }
-
-            if (selectedPlanKey !== "customAddOn") {
-                priceInput.value = selectedPlan.unitPrice.toFixed(2);
-                priceInput.readOnly = true; // Make price read-only for predefined items
-                priceInput.classList.add('bg-gray-100'); // Add a visual cue for read-only
+            
+            let selectedItem;
+            if (rowType === 'service') {
+                selectedItem = servicePlans[selectedKey];
             } else {
-                priceInput.value = "0.00"; // Reset to 0 for custom
-                priceInput.readOnly = false; // Make price editable for custom
-                priceInput.classList.remove('bg-gray-100'); // Remove visual cue
+                selectedItem = addons[selectedKey];
             }
+            
+            if (selectedItem) {
+                if (licenseDisplay) {
+                    licenseDisplay.textContent = selectedItem.license;
+                }
+                
+                if (priceDisplay) {
+                    priceDisplay.textContent = formatCurrency(selectedItem.unitPrice);
+                }
+            }
+            
+            calculateAndDisplay();
         }
 
         // Handle change event for one-time service select
@@ -1309,29 +1542,23 @@
             const selectedItemKey = selectElement.value;
             const selectedItem = oneTimeItems[selectedItemKey];
             const customDescriptionInput = row.querySelector('.custom-description-input');
-            const itemDetailInput = row.querySelector('.item-detail-input'); // Renamed from license-input
+            const itemDetailInput = row.querySelector('.item-detail-input');
             const priceInput = row.querySelector('.price-input');
 
-            // Always show the select element initially
-            selectElement.classList.remove('hidden');
-
+            // Handle custom item case - don't hide the select
             if (selectedItemKey === "customOneTime") {
-                customDescriptionInput.classList.remove('hidden'); // Show custom description input
-                selectElement.classList.add('hidden'); // Hide the select element for custom item
-                // If the custom description input is empty, set its value to the default custom item description
+                customDescriptionInput.classList.remove('hidden');
                 if (customDescriptionInput.value === "") {
                     customDescriptionInput.value = selectedItem.description;
                 }
-                itemDetailInput.value = selectedItem.itemDetail; // Set default item detail for custom
-                itemDetailInput.readOnly = false; // Make item detail editable for custom
+                itemDetailInput.value = selectedItem.itemDetail;
+                itemDetailInput.readOnly = false;
                 itemDetailInput.classList.remove('bg-gray-100');
                 priceInput.value = selectedItem.price.toFixed(2);
-                priceInput.readOnly = false; // Make price editable for custom
+                priceInput.readOnly = false;
                 priceInput.classList.remove('bg-gray-100');
             } else {
-                customDescriptionInput.classList.add('hidden'); // Hide custom description input
-                selectElement.classList.remove('hidden'); // Show the select element
-                // Set the item detail and price based on the selected predefined item
+                customDescriptionInput.classList.add('hidden');
                 itemDetailInput.value = selectedItem.itemDetail;
                 itemDetailInput.readOnly = true;
                 itemDetailInput.classList.add('bg-gray-100');
@@ -1352,30 +1579,38 @@
             document.querySelectorAll('#monthlyRecurringTable tbody tr').forEach(row => {
                 const qtyInput = row.querySelector('.qty-input');
                 const serviceSelect = row.querySelector('.service-select');
-                const priceInput = row.querySelector('.price-input');
+                const priceDisplay = row.querySelector('.price-display');
                 const rowTotalDisplay = row.querySelector('.row-total');
+                const rowType = row.getAttribute('data-row-type');
 
                 const quantity = parseInt(qtyInput.value) || 0;
-                const selectedPlanKey = serviceSelect.value;
-                const selectedPlan = monthlyPlans[selectedPlanKey];
-
-                let unitPrice = parseFloat(priceInput.value) || 0; // Use current input value if user typed
-
-                // If it's not a custom add-on, ensure the price input reflects the default unit price
-                if (selectedPlanKey !== "customAddOn") {
-                    unitPrice = selectedPlan.unitPrice;
-                    priceInput.value = unitPrice.toFixed(2); // Update input field with default price
+                const selectedKey = serviceSelect.value;
+                
+                // Skip calculation if no selection made
+                if (!selectedKey) {
+                    rowTotalDisplay.textContent = formatCurrency(0);
+                    return; // This is the fix - using return instead of continue
                 }
-                // For customAddOn, unitPrice is already taken from the input field.
+                
+                let selectedItem;
+                if (rowType === 'service') {
+                    selectedItem = servicePlans[selectedKey];
+                } else {
+                    selectedItem = addons[selectedKey];
+                }
 
-                const rowTotal = quantity * unitPrice;
-                rowTotalDisplay.textContent = formatCurrency(rowTotal);
-                totalMonthlyRecurring += rowTotal;
+                if (selectedItem) {
+                    const unitPrice = selectedItem.unitPrice;
+                    const rowTotal = quantity * unitPrice;
+                    rowTotalDisplay.textContent = formatCurrency(rowTotal);
+                    totalMonthlyRecurring += rowTotal;
+                } else {
+                    rowTotalDisplay.textContent = formatCurrency(0);
+                }
             });
 
             document.getElementById('totalMonthlyRecurring').textContent = formatCurrency(totalMonthlyRecurring);
             document.getElementById('totalAnnualRecurring').textContent = formatCurrency(totalMonthlyRecurring * 12);
-
 
             // One-Time Costs
             let totalOneTimeCharge = 0;
@@ -1383,20 +1618,18 @@
                 const qtyInput = row.querySelector('.qty-input');
                 const serviceSelect = row.querySelector('.one-time-service-select');
                 const customDescriptionInput = row.querySelector('.custom-description-input');
-                const itemDetailInput = row.querySelector('.item-detail-input'); // Renamed from license-input
+                const itemDetailInput = row.querySelector('.item-detail-input');
                 const priceInput = row.querySelector('.price-input');
                 const rowTotalDisplay = row.querySelector('.row-total');
 
-                // Quantity can be empty for discount/tax rows, default to 1 if input is not found (e.g., for custom items without a qty field)
                 const quantity = (qtyInput ? parseInt(qtyInput.value) : 1) || 0;
                 const selectedItemKey = serviceSelect.value;
                 const selectedItem = oneTimeItems[selectedItemKey];
 
                 // Handle custom description input visibility and value
                 if (selectedItemKey === "customOneTime") {
-                    customDescriptionInput.classList.remove('hidden'); // Show custom input
-                    serviceSelect.classList.add('hidden'); // Hide the select element for custom item
-                    if (customDescriptionInput.value === "") { // Only set default if empty
+                    customDescriptionInput.classList.remove('hidden');
+                    if (customDescriptionInput.value === "") {
                         customDescriptionInput.value = selectedItem.description;
                     }
                     itemDetailInput.readOnly = false;
@@ -1404,8 +1637,7 @@
                     itemDetailInput.classList.remove('bg-gray-100');
                     priceInput.classList.remove('bg-gray-100');
                 } else {
-                    customDescriptionInput.classList.add('hidden'); // Hide custom input
-                    serviceSelect.classList.remove('hidden'); // Show the select element
+                    customDescriptionInput.classList.add('hidden');
                     itemDetailInput.value = selectedItem.itemDetail;
                     priceInput.value = selectedItem.price.toFixed(2);
                     itemDetailInput.readOnly = true;
@@ -1429,6 +1661,12 @@
             document.getElementById('grandTotal').textContent = formatCurrency(grandTotalMonthlyRecurring + totalOneTimeCharge);
         }
 
+        // Function to auto-resize textareas
+        function autoResizeTextarea(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
         // Add event listeners when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             // Set today's date as default for proposalDate if it's empty
@@ -1436,7 +1674,7 @@
             if (!proposalDateInput.value) {
                 const today = new Date();
                 const yyyy = today.getFullYear();
-                const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
                 const dd = String(today.getDate()).padStart(2, '0');
                 proposalDateInput.value = `${yyyy}-${mm}-${dd}`;
             }
@@ -1445,15 +1683,19 @@
             document.querySelectorAll('#monthlyRecurringTable tbody tr').forEach(row => {
                 const serviceSelect = row.querySelector('.service-select');
                 if (serviceSelect) {
-                    handleMonthlyServiceChange(serviceSelect);
+                    // Only setup if a value is selected (not placeholder)
+                    if (serviceSelect.value) {
+                        handleServiceChange(serviceSelect);
+                    }
                     serviceSelect.addEventListener('change', (event) => {
-                        handleMonthlyServiceChange(event.target);
-                        calculateAndDisplay();
+                        handleServiceChange(event.target);
                     });
                 }
                 row.querySelector('.qty-input').addEventListener('input', calculateAndDisplay);
-                row.querySelector('.price-input').addEventListener('input', calculateAndDisplay);
-                row.querySelector('.delete-row-btn').addEventListener('click', deleteRow);
+                const deleteBtn = row.querySelector('.delete-row-btn');
+                if (deleteBtn && !deleteBtn.disabled) {
+                    deleteBtn.addEventListener('click', deleteRow);
+                }
             });
 
             // Initial setup for existing one-time cost rows
@@ -1469,7 +1711,11 @@
                 const qtyInput = row.querySelector('.qty-input');
                 if (qtyInput) qtyInput.addEventListener('input', calculateAndDisplay);
                 row.querySelector('.custom-description-input').addEventListener('input', calculateAndDisplay);
-                row.querySelector('.item-detail-input').addEventListener('input', calculateAndDisplay); // Renamed from license-input
+                const itemDetailTextarea = row.querySelector('.item-detail-input');
+                itemDetailTextarea.addEventListener('input', function() {
+                    autoResizeTextarea(this);
+                    calculateAndDisplay();
+                });
                 row.querySelector('.price-input').addEventListener('input', calculateAndDisplay);
                 row.querySelector('.delete-row-btn').addEventListener('click', deleteRow);
             });
@@ -1498,21 +1744,19 @@
 
             // Initial calculation on page load
             calculateAndDisplay();
+            
+            // Auto-resize all existing textareas
+            document.querySelectorAll('.item-detail-input').forEach(textarea => {
+                autoResizeTextarea(textarea);
+            });
         });
 
         // Function to handle page numbers for print
         window.onbeforeprint = () => {
-            const totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight); // Estimate total pages
+            const totalPages = Math.ceil(document.body.scrollHeight / window.innerHeight);
             const printFooter = document.querySelector('.print-footer');
             if (printFooter) {
-                printFooter.style.display = 'block'; // Show footer for printing
-                // This is a basic page numbering. For more accurate, complex layouts,
-                // a dedicated PDF generation library or more advanced CSS print rules might be needed.
-                // For simplicity, we'll just show the total pages on each footer.
-                // A more advanced solution would involve iterating through each page.
-                // For now, we'll just set a placeholder for the page number.
-                // Browsers often handle page numbering automatically in print previews.
-                // This is just to ensure the footer is visible.
+                printFooter.style.display = 'block';
                 printFooter.querySelector('.page-number').textContent = 'of ' + totalPages;
             }
         };
@@ -1520,7 +1764,7 @@
         window.onafterprint = () => {
             const printFooter = document.querySelector('.print-footer');
             if (printFooter) {
-                printFooter.style.display = 'none'; // Hide footer after printing
+                printFooter.style.display = 'none';
             }
         };
     </script>
